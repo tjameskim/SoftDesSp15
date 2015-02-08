@@ -298,21 +298,15 @@ def gene_finder(dna):
     # TODO: implement this
     threshold = len(longest_ORF_noncoding(dna,1500))
     all_orfs = find_all_ORFs_both_strands(dna)
-    amino_acids = [] #empty matrix to store amino acid strings
-    output = [] # final output
+    amino_acids = [] #empty matrix to store output
 
     for orf in all_orfs:
         if len(orf) >= threshold:
             amino_acids += coding_strand_to_AA(orf)
-            output.append(''.join(amino_acids))
-            amino_acids = []
 
-    return output
+    return amino_acids
 
-"""
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-"""
-dna = load_seq("./data/X73525.fa")
-print gene_finder(dna)

@@ -191,6 +191,7 @@ def find_all_ORFs(dna):
     output += find_all_ORFs_oneframe(dna)
     output += find_all_ORFs_oneframe(dna[1:])
     output += find_all_ORFs_oneframe(dna[2:])
+    #^ just running it thru previous function at differnt offsets
     return output
 
 def find_all_ORFs_both_strands(dna):
@@ -217,102 +218,8 @@ def find_all_ORFs_both_strands(dna):
     #^ adds to the output list all the reverse complement dna's orf w/ offsets
     return both_orf_all
 
-
-def longest_ORF(dna):
-    """ Finds the longest ORF on both strands of the specified DNA and returns it
-        as a string
-
-    I added new doc test. I can output something when there is no longest orf
-    aka. no orf at all
-    We return a empty string
-
-    >>> longest_ORF("ATGCGAATGTAGCATCAAA")
-    'ATGCTACATTCGCAT'
-    >>> longest_ORF("")
-    ''
-    """
-    # TODO: implement this
-    both_orf_all = find_all_ORFs_both_strands(dna)
-
-    if len(both_orf_all) > 0:
-        return max(both_orf_all, key = len)
-    else:
-        return ''
-
-def longest_ORF_noncoding(dna, num_trials):
-    """ Computes the maximum length of the longest ORF over num_trials shuffles
-        of the specfied DNA sequence
-        
-        dna: a DNA sequence
-        num_trials: the number of random shuffles
-        returns: the maximum length longest ORF """
-    # TODO: implement this
-    index = 0 # sets initial value for number of trials, hopefully greater than one
-    shuffled_dnas = [] # empty list to add output dnas to
-
-    while index < num_trials:
-        dna_random = shuffle_string(dna)
-        shuffled_dnas += [longest_ORF(dna_random)]
-        index += 1
-    return max(shuffled_dnas, key = len)
-
-def coding_strand_to_AA(dna):
-    """ Computes the Protein encoded by a sequence of DNA.  This function
-        does not check for start and stop codons (it assumes that the input
-        DNA sequence represents an protein coding region).
-        
-        dna: a DNA sequence represented as a string
-        returns: a string containing the sequence of amino acids encoded by the
-                 the input DNA fragment
-
-        We are not adding anymore doctests as the code assumed that the DNA sequence
-        is already an orf.
-        The only scenario is to worry about a string that is not divisable by 3.
-        AKA the string does not have no leftovers from codons (like 1 or 2 nucleotides)
-        So the 2nd doc tests tests when there is 2 nucleotides is leftover.
-
-        >>> coding_strand_to_AA("ATGCGA")
-        'MR'
-        >>> coding_strand_to_AA("ATGCCCGCTTT")
-        'MPA'
-    """
-    # TODO: implement this
-    thirds = [dna[i:i+3] for i in range(0, len(dna), 3)] #divide string of dna into 3
-    protein_list = [] #empty list to input amino acids
-    for codon in thirds:
-        if len(codon) == 3:
-            protein_list += aa_table[codon]
-    # sweeping each codon in the list and changing it to a amino acid
-    return ''.join(protein_list)
-
-def gene_finder(dna):
-    """ Returns the amino acid sequences coded by all genes that have an ORF
-        larger than the specified threshold.
-        
-        dna: a DNA sequence
-        threshold: the minimum length of the ORF for it to be considered a valid
-                   gene.
-        returns: a list of all amino acid sequences whose ORFs meet the minimum
-                 length specified.turn
-    """
-    # TODO: implement this
-    threshold = len(longest_ORF_noncoding(dna,1500))
-    all_orfs = find_all_ORFs_both_strands(dna)
-    amino_acids = [] #empty matrix to store amino acid strings
-    output = [] # final output
-
-    for orf in all_orfs:
-        if len(orf) >= threshold:
-            amino_acids += coding_strand_to_AA(orf)
-            output.append(''.join(amino_acids))
-            amino_acids = []
-
-    return output
-
-"""
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-"""
-dna = load_seq("./data/X73525.fa")
-print gene_finder(dna)
+
+print find_all_ORFs_both_strands('ATGCGAATGTAGCATCAAA')
