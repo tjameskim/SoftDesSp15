@@ -26,10 +26,26 @@ def update_counter(file_name, reset=False):
 	1
 	>>> update_counter('blah.txt')
 	3
+	>>> update_counter('blah.txt')
+	4
 	>>> update_counter('blah2.txt')
 	2
 	"""
-	pass
+	if reset == True:
+		fp = open(file_name,'w')
+		dump(1,fp)
+		return 1
+	elif exists(file_name):
+		fp = open(file_name,'r+')
+		loaded = load(fp)
+		fp.seek(0,0)
+		dump(loaded + 1, fp)
+		return loaded + 1
+	else:
+		fp = open(file_name,'w')
+		dump(1, fp)
+		return 1
+
 
 if __name__ == '__main__':
 	if len(sys.argv) < 2:
@@ -37,3 +53,4 @@ if __name__ == '__main__':
 		doctest.testmod()
 	else:
 		print "new value is " + str(update_counter(sys.argv[1]))
+		

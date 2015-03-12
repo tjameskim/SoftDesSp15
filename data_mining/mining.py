@@ -48,15 +48,12 @@ def search(google_search):
 	"""
 	all_Results = []
 	for result in g.search(google_search):
-		# result_txt = str(result.txt.encode('utf8'))
 		url = result.url
 		txt = URL(url).download()
 		soup = Soupy(txt)
 		search_text = str(soup.get_text().encode('utf8'))
 		all_Results.append(search_text)
 	return all_Results	
-		
-	# how do i get full text from articles and not summaries
 
 def mult_searches(m_search):
 	"""Creates a single text file with a lot of text 
@@ -66,7 +63,6 @@ def mult_searches(m_search):
 		all_Search_Results.extend(search(topic))
 	fp = codecs.open('search_text','r+')
 	fp.write(''.join(all_Search_Results))
-	#problem, the API seems to be expired and the thing overwrites
 
 def name_freq(m_search,players):
 	"""
