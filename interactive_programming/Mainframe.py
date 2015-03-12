@@ -102,6 +102,7 @@ class Mainframe:
 		self.katie_plane = MyPlane()
 		self.katie_plane_sprites = pygame.sprite.RenderPlain((self.katie_plane))
 		
+		"""make many enemy planes"""
 		self.enemy_plane = Enemy(0,1)
 		self.enemy_plane_sprites = pygame.sprite.RenderPlain((self.enemy_plane))
 

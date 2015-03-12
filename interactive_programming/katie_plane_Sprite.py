@@ -1,3 +1,6 @@
+"""Sets class that deals with the movement, update, and
+loading sprite of the user's plane"""
+
 import pygame
 import basicSprite
 from helpers import *

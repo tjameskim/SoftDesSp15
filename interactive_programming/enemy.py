@@ -1,4 +1,6 @@
 #! /usr/bin/env python
+"""Sets class that deals with the movement, update, and
+loading sprite of the enemy plane"""
 
 import pygame
 import basicSprite
