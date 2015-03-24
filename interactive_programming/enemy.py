@@ -27,7 +27,7 @@ class Enemy(pygame.sprite.Sprite):
 
         self.rect.move_ip(xMove,yMove) #move the rect
         self.moveCount += 1 #update the move count
-        if self.moveCount == 1750+500:
+        if self.moveCount == random.randint(2250,3000):
             self.rect.x = self.pos_x
             self.rect.y = random.randint(-1650+600,-45)
             self.moveCount = 0

@@ -1,0 +1,7 @@
+Print those scores!
+
+The G score is the movement cost (in this case, the number of squares one must move from its original point) to the specific square the G value is assigned. So for the square right next to the beginning square will have a G score of 1, while a square 2 steps from the origin will have a G score of 2.
+
+The H score is the estimated number of squares one must move from its current point to its destination point. The H score is often an estimate, as it derives from the shortest path to the destination (what we are looking for). In a commonly used "Manhattan distance method," the estimate counts the number of horizontal and vertical squares remaining to reach the destination.
+
+The F score is the sum of the G score and the H score. The F score is used to find the preferrable square to move to, as naturally, squares with the lower F score will have the lowest movement cost (closest to starting point), and lowest estimated number of squares left until the destination. Using the F score to find the favorable square will most likely get us the shortest distance to the destination.
