@@ -1,0 +1,12 @@
+1. What is the general trend of the curve?
+
+The accuracy of the test set has a linear relationship with the percentage of data used for training. As the percentage for training increases, the accuracy increases with a constant slope.
+
+2. Are there parts of the curve that appear to be noisier than others? Why?
+Yes, there seems to be a consistent decrease from the 5% to 10% range in the percent used for training with different num_trials values. This most likely is because of the error present in the 5% trial. Because there is less to use as a trial, the computer is more lenient with the tests, while 10% there is less error and it is less forgiving. After 10%, the training data continues to increase and the computer has a wider sample to work with, making error decrease, but also have a larger dataset to have higher accuracy tests.
+
+3. How many trials do you need to get a smooth curve?
+Approximately a thousand to stop the great fluctuating. However, small fluctuations still persist even at high trial values like 2000, or even 3000.
+
+4.Try different values for C (by changing LogisticRegression(C=10**-10)).  What happens? 
+If we increase the C value (eg: at 1**-10), we can see that the graph becomes smoother, but the line becomes curved, as it looks like a negative exponential decay graph. When we decrease the C value. IF we decrease the C value (eg: at 100**-10), we can see that the graph becomes smoother, a straight line at about 10%.
